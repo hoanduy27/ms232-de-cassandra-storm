@@ -24,4 +24,6 @@ replay_pid*
 
 *.out
 
+.vscode/
+
 storm-nimbus/code/target/
