@@ -1,0 +1,29 @@
+version: '3.2'
+
+services:
+    zookeeper:
+        build: ./zookeeper
+        # Keep it running.  
+        tty: true
+        
+    storm-nimbus:
+        build: ./storm-nimbus
+        links:
+            - zookeeper
+        tty: true
+        # To access the Storm UI from our host machine.  
+        ports:
+            - 8080:8080
+        volumes:
+            - './storm-nimbus:/theproject'
+
+    storm-supervisor:
+        build: ./storm-supervisor
+        links:
+            - zookeeper
+            - storm-nimbus
+        tty: true
+
+# Host volume used to store our code on the master node (Nimbus).
+volumes:
+    storm-nimbus:
