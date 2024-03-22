@@ -1,5 +1,9 @@
 package coincident_hashtags;
 
+import java.util.Map;
+import java.io.*;
+
+import org.apache.hadoop.hdfs.util.ByteArrayManager.Conf;
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.StormSubmitter;
@@ -13,9 +17,10 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.Utils;
+import org.yaml.snakeyaml.Yaml;
 
+import shaded.parquet.org.codehaus.jackson.map.ObjectMapper;
 
-import java.util.Map;
 
 
 public class ExclamationTopology {
@@ -71,11 +76,13 @@ public class ExclamationTopology {
     // attach another exclamation bolt to the topology - parallelism of 2
     builder.setBolt("exclaim2", new ExclamationBolt(), 2).shuffleGrouping("exclaim1");
 
-    // create the default config object
-    Config conf = new Config();
+    // ObjectMapper mapper = new ObjectMapper(new YAMLFactory)
 
-    // set the config in debugging mode
-    conf.setDebug(true);
+    // create the default config object
+    InputStream inputStream = ExclamationTopology.class.getResourceAsStream("storm.yaml");
+
+    Yaml yaml = new Yaml();
+    Map<String, Object> conf = yaml.load(inputStream);
 
     if (args != null && args.length > 0) {
 
@@ -85,7 +92,6 @@ public class ExclamationTopology {
       // If we have two supervisors with 4 allocated workers each, and this topology is
       // submitted to the master (Nimbus) node, then these 8 workers will be distributed
       // to the two supervisors evenly: four each. 
-      conf.setNumWorkers(8);
 
       // create the topology and submit with config
       StormSubmitter.submitTopology(args[0], conf, builder.createTopology());

@@ -11,6 +11,10 @@ storm.zookeeper.port: 2181
 # you have to address all machines' FQDN which run nimbus. 
 nimbus.seeds : ["storm-nimbus"]
 
+topology.debug: true
+
+topology.workers: 8
+
 # For each worker machine, you configure how many workers run on that 
 # machine with this config. Each worker uses a single port for receiving 
 # messages, and this setting defines which ports are open for use. 
