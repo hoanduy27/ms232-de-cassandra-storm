@@ -24,10 +24,10 @@ services:
             - storm-nimbus
         tty: true
 
-    # cassandra:
-    #     build: ./cassandra
-    #     volumes:
-    #         - './cassandra/src:/src'
+    cassandra:
+        build: ./cassandra
+        volumes:
+            - './cassandra/src:/src'
 
 
 # Host volume used to store our code on the master node (Nimbus).
