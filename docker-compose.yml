@@ -22,12 +22,16 @@ services:
         links:
             - zookeeper
             - storm-nimbus
+            - cassandra
         tty: true
 
     cassandra:
         build: ./cassandra
         volumes:
             - './cassandra/src:/src'
+        ports:
+            - 7199:7199
+        tty: true
 
 
 # Host volume used to store our code on the master node (Nimbus).

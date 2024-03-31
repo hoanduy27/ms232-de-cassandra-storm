@@ -52,3 +52,5 @@ CREATE TABLE gold_enriched_turbine (
     windspeed FLOAT,
     winddirection TEXT
 );
+
+ALTER TABLE iotsolution.bronze_weather_sensor ADD DEVICE_ID text;
