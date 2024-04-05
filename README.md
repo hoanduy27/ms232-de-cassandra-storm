@@ -11,7 +11,9 @@
 ```
 
 # Storm progress
-- Created a Spout to read from 
+- Created 2 spouts to read bronze tables in Cassandra.
+- Writing-up 2 Bolts for silver data tables (Only TODO now).
+- Set up the storm topology.
 
 # Known bugs
 - With cassandra=5.0*: 
