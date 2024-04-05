@@ -4,7 +4,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 # NOTE: will also work with other cassandra version tags
-FROM cassandra:5.0
+FROM cassandra:5.0-beta1
 
 # Fix UTF-8 accents in init scripts
 ENV LANG C.UTF-8
@@ -32,6 +32,8 @@ COPY *.cql /docker-entrypoint-initdb.d/
 
 # this is the script that will patch the already existing entrypoint from cassandra image
 COPY docker-entrypoint.sh /
+
+COPY cassandra.yaml /etc/cassandara/cassandara.yaml
 
 # Override ENTRYPOINT, keep CMD
 ENTRYPOINT ["/docker-entrypoint.sh"]

@@ -80,3 +80,5 @@ RUN cd /tmp && \
 
 RUN mkdir /theproject
 WORKDIR /theproject
+
+CMD storm nimbus

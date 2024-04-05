@@ -10,6 +10,7 @@ services:
         build: ./storm-nimbus
         links:
             - zookeeper
+            - cassandra
         tty: true
         # To access the Storm UI from our host machine.  
         ports:
@@ -31,6 +32,7 @@ services:
             - './cassandra/src:/src'
         ports:
             - 7199:7199
+            - 9042:9042
         tty: true
 
 
