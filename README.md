@@ -1,17 +1,21 @@
 
 # MS232 - Data Engineering
 
+
+
 # Build and run
 ```sh
     docker compose up -d
-    docker exec -it ms232-de-cassandra-storm-storm-nimbus-1 /bin/bash 
-    cd code
-    mvn clean install 
-    storm nimbus
-
-    # Run in the 2nd terminal
-    storm ui
-    
-    # Run in the 3rd terminal
-    storm jar target/coincident-hashtags-2.6.1.jar coincident_hashtags.ExclamationTopology exclamation-topology-usama
+    docker cp cassandra/cassandra.yaml ms232-de-cassandra-storm-cassandra-1:/etc/cassandra/cassandra.yaml
+    docker restart ms232-de-cassandra-storm-cassandra-1
 ```
+
+# Storm progress
+- Created a Spout to read from 
+
+# Known bugs
+- With cassandra=5.0*: 
+  ``` Error initializing connection: Invalid or unsupported protocol version (1); supported versions are (3/v3, 4/v4, 5/v5, 6/v6-beta)))```
+
+- With cassandra=4.1.4: `cassandra.yaml` is conflicted. Has remove some conflicted keys but no luck. :( 
+
